@@ -9,7 +9,7 @@ pipeline {
 	stage('Build') {
 		steps {
 			sh 'cd Jenkins/project'
-			sh 'mvn package'
+			sh 'mvn clean package'
 		}
 	}
 	stage('Database') {
