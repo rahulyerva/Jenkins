@@ -8,7 +8,7 @@ pipeline {
 	}
 	stage('Build') {
 		steps {
-			sh 'cd ./project'
+			sh 'cd Jenkins/project'
 			sh 'mvn package'
 		}
 	}
