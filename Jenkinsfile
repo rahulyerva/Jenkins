@@ -8,19 +8,21 @@ pipeline {
 	}
 	stage('Build') {
 		steps {
-			sh 'cd /var/lib/jenkins/workspace/test02_master/project'
+			sh 'cd ./project'
 			sh 'mvn package'
 		}
 	}
 	stage('Database') {
 		steps {
-			sh 'cd /var/lib/jenkins/workspace/test02_master/database'
+			sh 'cd ..'
+			sh 'cd ./database'
 			sh 'mvn clean package -Dscope=FlywayMigration'
 		}
 	}
 	stage('Deploy') {
 		steps {
-			sh 'cd /var/lib/jenkins/workspace/test02_master/project'
+			sh 'cd ..'
+			sh 'cd ./project'
 			sh 'mvn clean install'
 		}
 	}
