@@ -9,13 +9,13 @@ pipeline {
 	stage('Build') {
 		steps {
 			sh 'cd /var/lib/jenkins/workspace/test02_master/project'
-			sh 'mvn clean test'
+			sh 'mvn package'
 		}
 	}
 	stage('Database') {
 		steps {
 			sh 'cd /var/lib/jenkins/workspace/test02_master/database'
-			sh 'mvn clean test -Dscope=FlywayMigration'
+			sh 'mvn clean package -Dscope=FlywayMigration'
 		}
 	}
 	stage('Deploy') {
