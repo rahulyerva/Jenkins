@@ -1,14 +1,15 @@
 pipeline {
 	agent any
-	stages('Clone') {
+	stages{
+	stage('Clone') {
 		steps {
-			sh 'cd ${env.WORKSPACE}'
+			sh 'cd ${env.WORKSPACE}
 			sh 'git clone https://github.com/rahulyerva/Jenkins.git'
 		}
 	}
-	stages('Build') {
+	stage('Build') {
 		steps {
-			sh 'cd ${env.WORKSPACE}/project'
+			sh 'cd ${env.WORKSPACE}/project
 			sh 'mvn clean test'
 		}
 	}
@@ -19,9 +20,9 @@ pipeline {
              body: "Something is wrong with ${env.BUILD_URL}"
     }
 }
-	stages('Database') {
+	stage('Database') {
 		steps {
-			sh 'cd ${env.WORKSPACE}/database'
+			sh 'cd ${env.WORKSPACE}/database
 			sh 'mvn clean test -Dscope=FlywayMigration'
 		}
 	}
@@ -32,9 +33,9 @@ pipeline {
              body: "Something is wrong with ${env.BUILD_URL}"
     }
 }
-	stages('Deploy') {
+	stage('Deploy') {
 		steps {
-			sh 'cd ${env.WORKSPACE}/project'
+			sh 'cd ${env.WORKSPACE}/project
 			sh 'mvn clean install'
 		}
 	}
@@ -45,7 +46,7 @@ pipeline {
              body: "Something is wrong with ${env.BUILD_URL}"
     }
 }
-	stages('Run Parellel Tests') {
+	stage('Run Parellel Tests') {
 		parallel {
 			stage('test performance') {
 				steps{
@@ -71,4 +72,5 @@ pipeline {
              body: "Something is wrong with ${env.BUILD_URL}"
     }
 }
+	}
 	}
