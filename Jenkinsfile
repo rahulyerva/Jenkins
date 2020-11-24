@@ -2,13 +2,13 @@ pipeline {
 	agent any
 	stages('Clone') {
 		steps {
-			sh 'cd ${env.WORKSPACE}
+			sh 'cd ${env.WORKSPACE}'
 			sh 'git clone https://github.com/rahulyerva/Jenkins.git'
 		}
 	}
 	stages('Build') {
 		steps {
-			sh 'cd ${env.WORKSPACE}/project
+			sh 'cd ${env.WORKSPACE}/project'
 			sh 'mvn clean test'
 		}
 	}
@@ -21,7 +21,7 @@ pipeline {
 }
 	stages('Database') {
 		steps {
-			sh 'cd ${env.WORKSPACE}/database
+			sh 'cd ${env.WORKSPACE}/database'
 			sh 'mvn clean test -Dscope=FlywayMigration'
 		}
 	}
@@ -34,7 +34,7 @@ pipeline {
 }
 	stages('Deploy') {
 		steps {
-			sh 'cd ${env.WORKSPACE}/project
+			sh 'cd ${env.WORKSPACE}/project'
 			sh 'mvn clean install'
 		}
 	}
