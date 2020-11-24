@@ -3,25 +3,24 @@ pipeline {
 	stages{
 	stage('Clone') {
 		steps {
-			sh 'cd ${env.WORKSPACE}'
 			sh 'git clone https://github.com/rahulyerva/Jenkins.git'
 		}
 	}
 	stage('Build') {
 		steps {
-			sh 'cd ${env.WORKSPACE}/project'
+			sh 'cd /var/lib/jenkins/workspace/test02_master/project'
 			sh 'mvn clean test'
 		}
 	}
 	stage('Database') {
 		steps {
-			sh 'cd ${env.WORKSPACE}/database'
+			sh 'cd /var/lib/jenkins/workspace/test02_master/database'
 			sh 'mvn clean test -Dscope=FlywayMigration'
 		}
 	}
 	stage('Deploy') {
 		steps {
-			sh 'cd ${env.WORKSPACE}/project'
+			sh 'cd /var/lib/jenkins/workspace/test02_master/project'
 			sh 'mvn clean install'
 		}
 	}
