@@ -1,14 +1,9 @@
 pipeline {
 	agent any
 	stages{
-	stage('Clone') {
-		steps {
-			sh 'git clone https://github.com/rahulyerva/Jenkins.git'
-		}
-	}
 	stage('Build') {
 		steps {
-			sh 'cd Jenkins/project'
+			sh 'cd ./project'
 			sh 'mvn clean package'
 		}
 	}
